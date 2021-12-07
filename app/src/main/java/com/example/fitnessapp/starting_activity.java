@@ -32,5 +32,17 @@ public class starting_activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        final Button manEntr_Btn=(Button) findViewById(R.id.manual_entry_Btn);
+        manEntr_Btn.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(starting_activity.this, manual_entry.class);
+                startActivity(intent);
+            }
+        });
     }
 }

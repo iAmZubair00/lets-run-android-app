@@ -51,7 +51,7 @@ public class signup extends AppCompatActivity {
 
         DB = new DBHelper(this);
 
-        final RelativeLayout regBtn=(RelativeLayout) findViewById(R.id.signup_registerBtn);
+        final Button regBtn=(Button) findViewById(R.id.signup_registerBtn);
         regBtn.setOnClickListener(new View.OnClickListener()
         {
 
@@ -103,10 +103,6 @@ public class signup extends AppCompatActivity {
                         .start();
             }
         });
-
-
-
-
 
     }
 
