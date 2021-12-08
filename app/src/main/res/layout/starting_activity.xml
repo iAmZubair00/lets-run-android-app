@@ -25,31 +25,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_below="@id/tab_layout" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/input_type" />
-
-    <Spinner
-        android:id="@+id/inputSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/input_type_items"
-        android:padding="20dp"
-        android:spinnerMode="dropdown" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_type" />
-
-    <Spinner
-        android:id="@+id/activitySpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/activity_type_items"
-        android:padding="20dp"
-        android:spinnerMode="dropdown" />
 
     <Button
         android:id="@+id/signoutBtn"
