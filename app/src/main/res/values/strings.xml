@@ -17,6 +17,12 @@
         <item>Hiking</item>
         <item>Downhill Skiing</item>
     </string-array>
+
+    <string-array name="unit_prefs">
+        <item>Miles</item>
+        <item>Km</item>
+        <item>Meters</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

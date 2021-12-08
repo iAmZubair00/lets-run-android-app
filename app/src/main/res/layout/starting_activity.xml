@@ -26,19 +26,6 @@
         android:layout_weight="1"
         android:layout_below="@id/tab_layout" />
 
-    <Button
-        android:id="@+id/signoutBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="signout" />
-    <Button
-        android:id="@+id/manual_entry_Btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Go to Manual Entry" />
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"

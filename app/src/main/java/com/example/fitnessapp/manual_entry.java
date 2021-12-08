@@ -7,6 +7,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,6 +34,8 @@ public class manual_entry extends AppCompatActivity implements DatePickerDialog.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manual_entry);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         entryListV = (ListView) findViewById(R.id.entryListView);
 
@@ -68,7 +73,27 @@ public class manual_entry extends AppCompatActivity implements DatePickerDialog.
             }
         });
 
+
+        final Button cancelBtn=(Button) findViewById(R.id.cancelButton);
+        cancelBtn.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(manual_entry.this, starting_activity.class);
+                startActivity(intent);
+            }
+        });
+
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater= getMenuInflater();
+//        inflater.inflate(R.menu.save_btn, menu);
+//        return true;
+//    }
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

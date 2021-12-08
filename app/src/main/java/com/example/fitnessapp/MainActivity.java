@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
                 Cursor userData = DB.getdata();
                 userData.moveToFirst();
-                //Log.d("saved email=",userData.getString(0));
-                //Log.d("saved password=",userData.getString(1));
+                Log.d("saved email=",userData.getString(0));
+                Log.d("saved password=",userData.getString(1));
                 try{
                     if(userData.getCount()==0){
                         Toast.makeText(MainActivity.this, "No Entry Exists", Toast.LENGTH_SHORT).show();

@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -23,9 +27,6 @@ public class starting_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.starting_activity);
-
-        SharedPreferences sh_prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor pref_editor = sh_prefs.edit();
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Start"));
@@ -56,31 +57,30 @@ public class starting_activity extends AppCompatActivity {
         });
 
 
-        final Button signOutBtn=(Button) findViewById(R.id.signoutBtn);
-        signOutBtn.setOnClickListener(new View.OnClickListener()
-        {
 
-            @Override
-            public void onClick(View v)
-            {
-                pref_editor.clear();
-                pref_editor.apply();
+    }
 
-                Intent intent = new Intent(starting_activity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add("Edit Profile");
+        menu.add("Set Goal");
+        return super.onCreateOptionsMenu(menu);
+    }
 
-        final Button manEntr_Btn=(Button) findViewById(R.id.manual_entry_Btn);
-        manEntr_Btn.setOnClickListener(new View.OnClickListener()
-        {
 
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(starting_activity.this, manual_entry.class);
-                startActivity(intent);
-            }
-        });
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getTitle().equals("Edit Profile")){
+            Intent intent = new Intent(starting_activity.this, signup.class);
+            startActivity(intent);
+        }
+        else if(item.getTitle().equals("Set Goal")){
+            Intent intent = new Intent(starting_activity.this, signup.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

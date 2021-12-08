@@ -30,7 +30,8 @@
         </activity>
         <activity
             android:name=".manual_entry"
-            android:label="Manual Entry Activity">
+            android:label="Manual Entry Activity"
+            android:parentActivityName=".starting_activity">
         </activity>
     </application>
 

@@ -26,6 +26,7 @@ public class signup extends AppCompatActivity {
     private EditText emailField;
     private ImageView imgView;
     private Button changeBtn;
+    private Button goToLoginBtn;
     String email;
     String password;
     String email_pref;
@@ -87,6 +88,18 @@ public class signup extends AppCompatActivity {
                 Intent intent = new Intent(signup.this, MainActivity.class);
                 startActivity(intent);
 
+            }
+        });
+
+        goToLoginBtn=(Button) findViewById(R.id.signup_gotoLoginBtn);
+        goToLoginBtn.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(signup.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
