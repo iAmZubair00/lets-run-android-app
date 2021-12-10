@@ -1,12 +1,15 @@
 package com.example.fitnessapp;
 
 import android.app.DatePickerDialog;
+import android.app.FragmentManager;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import androidx.appcompat.app.AppCompatActivity;
+import android.app.DialogFragment;
+
 
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,6 +32,8 @@ public class manual_entry extends AppCompatActivity implements DatePickerDialog.
 
     Calendar mDateAndTime = Calendar.getInstance();
 
+    FragmentManager fm = this.getFragmentManager();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,8 @@ public class manual_entry extends AppCompatActivity implements DatePickerDialog.
         setContentView(R.layout.manual_entry);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
         entryListV = (ListView) findViewById(R.id.entryListView);
 
@@ -68,6 +75,27 @@ public class manual_entry extends AppCompatActivity implements DatePickerDialog.
                                 mDateAndTime.get(Calendar.MINUTE),
                                 true
                         ).show();
+                        break;
+
+                    case 2:
+                        DialogFragment dialogFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_DURATION);
+                        dialogFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_duration));
+                        break;
+                    case 3:
+                        DialogFragment distFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_DISTANCE);
+                        distFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_distance));
+                        break;
+                    case 4:
+                        DialogFragment calFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_CALORIES);
+                        calFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_calories));
+                        break;
+                    case 5:
+                        DialogFragment heartFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_HEART_RATE);
+                        heartFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_heart_rate));
+                        break;
+                    case 6:
+                        DialogFragment commFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_COMMENT);
+                        commFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_comment));
                         break;
                 }
             }

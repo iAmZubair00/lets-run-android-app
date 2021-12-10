@@ -4,6 +4,21 @@
     <string name="activity_type">Activity Type</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
+    <string name="hint">How did it go? Notes here.</string>
+
+    <string name="ui_manual_entry_duration_title">Duration</string>
+    <string name="ui_manual_entry_distance_title">Distance</string>
+    <string name="ui_manual_entry_calories_title">Calories</string>
+    <string name="ui_manual_entry_heart_rate_title">Heart Rate</string>
+    <string name="ui_manual_entry_comment_title">Comment</string>
+
+    <string name="dialog_fragment_tag_duration">Duration TAG</string>
+    <string name="dialog_fragment_tag_distance">Distance TAG</string>
+    <string name="dialog_fragment_tag_calories">Calories TAG</string>
+    <string name="dialog_fragment_tag_heart_rate">Heart Rate TAG</string>
+    <string name="dialog_fragment_tag_comment">Comment TAG</string>
+
     <string-array name="input_type_items">
         <item>Manual Entry</item>
         <item>GPS</item>

@@ -39,10 +39,7 @@ public class signup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
 
-        SharedPreferences sh_prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor pref_editor = sh_prefs.edit();
-        email_pref= sh_prefs.getString("email","");
-        password_pref=sh_prefs.getString("password","");
+
 
         emailField = (EditText) findViewById(R.id.signup_email);
         passField = (EditText) findViewById(R.id.signup_password);
@@ -59,31 +56,7 @@ public class signup extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-
-                email=emailField.getText().toString();
-                password =passField.getText().toString();
-
-                SharedPreferences.Editor pref_editor = sh_prefs.edit();
-
-
-
-
-                //Log.i("email is",email);
-                //Log.i("password is",password);
-                Boolean checkinsertdata = DB.insertuserdata(email, password);
-                if(checkinsertdata==true){
-                    Toast.makeText(signup.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
-
-                    if(email_pref.isEmpty() && password_pref.isEmpty()){
-                        pref_editor.putString("email", email);
-                        pref_editor.putString("password", password);
-                        pref_editor.apply();
-                    }
-                }
-                else{
-                    Toast.makeText(signup.this, "New Entry Not Inserted", Toast.LENGTH_SHORT).show();
-                }
-
+                saveUserInfo();
 
                 Intent intent = new Intent(signup.this, MainActivity.class);
                 startActivity(intent);
@@ -126,4 +99,35 @@ public class signup extends AppCompatActivity {
         Uri uri=data.getData();
         imgView.setImageURI(uri);
     }
+
+    private void saveUserInfo(){
+
+        SharedPreferences sh_prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor pref_editor = sh_prefs.edit();
+        email_pref= sh_prefs.getString("email","");
+        password_pref=sh_prefs.getString("password","");
+
+        email=emailField.getText().toString();
+        password =passField.getText().toString();
+
+
+
+
+        //Log.i("email is",email);
+        //Log.i("password is",password);
+        Boolean checkinsertdata = DB.insertuserdata(email, password);
+        if(checkinsertdata==true){
+            Toast.makeText(signup.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
+
+            if(email_pref.isEmpty() && password_pref.isEmpty()){
+                pref_editor.putString("email", email);
+                pref_editor.putString("password", password);
+                pref_editor.apply();
+            }
+        }
+        else{
+            Toast.makeText(signup.this, "New Entry Not Inserted", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

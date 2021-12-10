@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Spinner;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,16 +68,31 @@ public class start_frag extends Fragment {
 
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_start_frag, container, false);
+        Spinner inputSpinner = (Spinner) view.findViewById(R.id.inputSpinner);
+        Spinner activitySpinner=(Spinner) view.findViewById(R.id.activitySpinner);
 
-        final Button addActivityBtn=(Button) view.findViewById(R.id.addActivityBtn);
-        addActivityBtn.setOnClickListener(new View.OnClickListener()
+        final Button startActivityBtn=(Button) view.findViewById(R.id.addActivityBtn);
+        startActivityBtn.setOnClickListener(new View.OnClickListener()
         {
 
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(getContext(), manual_entry.class);
-                startActivity(intent);
+
+                String selectedSpinnerItem = inputSpinner.getSelectedItem().toString();
+                String selectedActivityItem = activitySpinner.getSelectedItem().toString();
+
+
+                if (selectedSpinnerItem.equals("Manual Entry")) {
+                    Intent mManualEntryIntent = new Intent(getContext(), manual_entry.class);
+                    mManualEntryIntent.putExtra("activity_type",selectedActivityItem);
+                    startActivity(mManualEntryIntent);
+                } else {
+                    Intent mGPSIntent = new Intent(getContext(), mapActivity.class);
+                    mGPSIntent.putExtra("activity_type",selectedActivityItem);
+                    startActivity(mGPSIntent);
+                }
+
             }
         });
 
