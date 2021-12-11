@@ -1,9 +1,7 @@
 package com.example.fitnessapp;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,9 +9,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RelativeLayout;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -74,11 +69,11 @@ public class starting_activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if(item.getTitle().equals("Edit Profile")){
-            Intent intent = new Intent(starting_activity.this, signup.class);
+            Intent intent = new Intent(starting_activity.this, profile.class);
             startActivity(intent);
         }
         else if(item.getTitle().equals("Set Goal")){
-            Intent intent = new Intent(starting_activity.this, signup.class);
+            Intent intent = new Intent(starting_activity.this, profile.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

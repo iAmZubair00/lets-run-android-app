@@ -2,7 +2,6 @@ package com.example.fitnessapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.preference.PreferenceManager;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +11,9 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class Login extends AppCompatActivity {
 
     private EditText passField;
     private EditText emailField;
@@ -21,24 +22,25 @@ public class MainActivity extends AppCompatActivity {
     String email_pref;
     String password_pref;
 
-    DBHelper DB;
+    userDBHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login);
 
         SharedPreferences sh_prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor pref_editor = sh_prefs.edit();
-        email_pref= sh_prefs.getString("email","");
-        password_pref=sh_prefs.getString("password","");
-        if(!email_pref.isEmpty() && !password_pref.isEmpty()){
-            Intent intent = new Intent(MainActivity.this, starting_activity.class);
+        String email_pref= sh_prefs.getString("email","");
+        String password_pref=sh_prefs.getString("password","");
+        long userId=sh_prefs.getLong("userId",0);
+        if(!email_pref.isEmpty() && !password_pref.isEmpty() && userId!=0){
+            Intent intent = new Intent(Login.this, starting_activity.class);
             startActivity(intent);
         }
 
 
-        DB = new DBHelper(this);
+        DB = new userDBHelper(this);
 
         final RelativeLayout regBtn=(RelativeLayout) findViewById(R.id.signin_registerBtn);
         regBtn.setOnClickListener(new View.OnClickListener()
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(MainActivity.this, signup.class);
+                Intent intent = new Intent(Login.this, profile.class);
                 startActivity(intent);
             }
         });
@@ -65,34 +67,35 @@ public class MainActivity extends AppCompatActivity {
                 email=emailField.getText().toString();
                 password =passField.getText().toString();
 
-                Cursor userData = DB.getdata();
-                userData.moveToFirst();
-                Log.d("saved email=",userData.getString(0));
-                Log.d("saved password=",userData.getString(1));
+                ArrayList<User> allUsers= DB.fetchUsers();
+
+                //Log.d("saved email=",userData.getString(0));
+                //Log.d("saved password=",userData.getString(1));
                 try{
-                    if(userData.getCount()==0){
-                        Toast.makeText(MainActivity.this, "No Entry Exists", Toast.LENGTH_SHORT).show();
+                    if(allUsers.isEmpty()){
+                        Toast.makeText(Login.this, "No Entry Exists", Toast.LENGTH_SHORT).show();
                     }
                     else{
                         boolean found=false;
-                        while (userData.moveToNext()) {
+                        for (User user: allUsers) {
                             /*Log.d("email in database:",userData.getString(0).getClass().getSimpleName());
 
                             Log.d("email entered:",email);
                             Log.d("password in database:",userData.getString(1));
                             Log.d("password entered:",password);*/
-                            if(email.equals(userData.getString(1)) && password.equals(userData.getString(0))){
+                            if(email.equals(user.getEmail()) && password.equals(user.getPassword())){
                                 Toast.makeText(getApplicationContext(),"you successfully logged In",Toast.LENGTH_LONG).show();
                                 found=true;
                                 //Log.d("matched:","everything");
 
-                                if(email_pref.isEmpty() && password_pref.isEmpty()){
-                                    pref_editor.putString("email", email);
-                                    pref_editor.putString("password", password);
+                                if(email_pref.isEmpty() && password_pref.isEmpty() && userId==0){
+                                    pref_editor.putLong("userId", user.getId());
+                                    pref_editor.putString("email", user.getEmail());
+                                    pref_editor.putString("password", user.getPassword());
                                     pref_editor.apply();
                                 }
 
-                                Intent intent = new Intent(MainActivity.this, starting_activity.class);
+                                Intent intent = new Intent(Login.this, starting_activity.class);
                                 startActivity(intent);
 
                             }

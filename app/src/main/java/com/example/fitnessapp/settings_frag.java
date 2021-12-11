@@ -10,7 +10,6 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -80,7 +79,7 @@ public class settings_frag extends Fragment {
                 pref_editor.clear();
                 pref_editor.apply();
 
-                Intent intent = new Intent(getContext(), MainActivity.class);
+                Intent intent = new Intent(getContext(), Login.class);
                 startActivity(intent);
             }
         });

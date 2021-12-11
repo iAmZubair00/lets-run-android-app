@@ -12,7 +12,7 @@
         android:theme="@style/Theme.FitnessApp">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".Login"
             android:exported="true"
             android:label="Sign In">
             <intent-filter>
@@ -22,8 +22,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".signup"
-            android:label="Register"></activity>
+            android:name=".profile"
+            android:label="Profile"
+            android:parentActivityName=".starting_activity"></activity>
         <activity
             android:name=".starting_activity"
             android:label="MainActivity"></activity>

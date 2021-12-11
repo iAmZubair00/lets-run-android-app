@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DialogFragment;
 
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -33,6 +34,10 @@ public class manual_entry extends AppCompatActivity implements DatePickerDialog.
     Calendar mDateAndTime = Calendar.getInstance();
 
     FragmentManager fm = this.getFragmentManager();
+
+    // for database
+    public static ExerciseEntry entry;
+    private exerciseDBHelper exDbHelper;
 
 
     @Override
@@ -98,6 +103,7 @@ public class manual_entry extends AppCompatActivity implements DatePickerDialog.
                         commFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_comment));
                         break;
                 }
+                //Log.d("durationSet",""+ entry.getmDuration());
             }
         });
 
