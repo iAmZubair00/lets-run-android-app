@@ -16,8 +16,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class manual_entry extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,
@@ -44,76 +46,76 @@ public class manual_entry extends AppCompatActivity implements DatePickerDialog.
 
 
 
-        entryListV = (ListView) findViewById(R.id.entryListView);
-
-        ArrayAdapter<String> entryAdapter = new ArrayAdapter<String>
-                (getApplicationContext(), android.R.layout.simple_list_item_1,
-                        android.R.id.text1, entry_options);
-
-        entryListV.setAdapter(entryAdapter);
-
-        entryListV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-
-                    case 0:
-                        new DatePickerDialog(
-                                manual_entry.this,
-                                manual_entry.this,
-                                mDateAndTime.get(Calendar.YEAR),
-                                mDateAndTime.get(Calendar.MONTH),
-                                mDateAndTime.get(Calendar.DAY_OF_MONTH)
-                        ).show();
-                        break;
-
-                    case 1:
-                        new TimePickerDialog(
-                                manual_entry.this,
-                                manual_entry.this,
-                                mDateAndTime.get(Calendar.HOUR),
-                                mDateAndTime.get(Calendar.MINUTE),
-                                true
-                        ).show();
-                        break;
-
-                    case 2:
-                        DialogFragment dialogFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_DURATION);
-                        dialogFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_duration));
-                        break;
-                    case 3:
-                        DialogFragment distFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_DISTANCE);
-                        distFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_distance));
-                        break;
-                    case 4:
-                        DialogFragment calFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_CALORIES);
-                        calFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_calories));
-                        break;
-                    case 5:
-                        DialogFragment heartFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_HEART_RATE);
-                        heartFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_heart_rate));
-                        break;
-                    case 6:
-                        DialogFragment commFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_COMMENT);
-                        commFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_comment));
-                        break;
-                }
-                //Log.d("durationSet",""+ entry.getmDuration());
-            }
-        });
-
-
-        final Button cancelBtn=(Button) findViewById(R.id.cancelButton);
-        cancelBtn.setOnClickListener(new View.OnClickListener()
-        {
-
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(manual_entry.this, main_activity.class);
-                startActivity(intent);
-            }
-        });
+//        entryListV = (ListView) findViewById(R.id.entryListView);
+//
+//        ArrayAdapter<String> entryAdapter = new ArrayAdapter<String>
+//                (getApplicationContext(), android.R.layout.simple_list_item_1,
+//                        android.R.id.text1, entry_options);
+//
+//        entryListV.setAdapter(entryAdapter);
+//
+//        entryListV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                switch (position) {
+//
+//                    case 0:
+//                        new DatePickerDialog(
+//                                manual_entry.this,
+//                                manual_entry.this,
+//                                mDateAndTime.get(Calendar.YEAR),
+//                                mDateAndTime.get(Calendar.MONTH),
+//                                mDateAndTime.get(Calendar.DAY_OF_MONTH)
+//                        ).show();
+//                        break;
+//
+//                    case 1:
+//                        new TimePickerDialog(
+//                                manual_entry.this,
+//                                manual_entry.this,
+//                                mDateAndTime.get(Calendar.HOUR),
+//                                mDateAndTime.get(Calendar.MINUTE),
+//                                true
+//                        ).show();
+//                        break;
+//
+//                    case 2:
+//                        DialogFragment dialogFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_DURATION);
+//                        dialogFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_duration));
+//                        break;
+//                    case 3:
+//                        DialogFragment distFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_DISTANCE);
+//                        distFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_distance));
+//                        break;
+//                    case 4:
+//                        DialogFragment calFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_CALORIES);
+//                        calFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_calories));
+//                        break;
+//                    case 5:
+//                        DialogFragment heartFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_HEART_RATE);
+//                        heartFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_heart_rate));
+//                        break;
+//                    case 6:
+//                        DialogFragment commFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_COMMENT);
+//                        commFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_comment));
+//                        break;
+//                }
+//                //Log.d("durationSet",""+ entry.getmDuration());
+//            }
+//        });
+//
+//
+//        final Button cancelBtn=(Button) findViewById(R.id.cancelButton);
+//        cancelBtn.setOnClickListener(new View.OnClickListener()
+//        {
+//
+//            @Override
+//            public void onClick(View v)
+//            {
+//                Intent intent = new Intent(manual_entry.this, main_activity.class);
+//                startActivity(intent);
+//            }
+//        });
 
     }
 
@@ -129,11 +131,65 @@ public class manual_entry extends AppCompatActivity implements DatePickerDialog.
         mDateAndTime.set(Calendar.YEAR, year);
         mDateAndTime.set(Calendar.MONTH, monthOfYear);
         mDateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        TextView temp=(TextView) findViewById(R.id.dateShow);
+        temp.setText(format.format(mDateAndTime.getTime()));
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         mDateAndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
         mDateAndTime.set(Calendar.MINUTE, minute);
+        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+        TextView temp=(TextView) findViewById(R.id.timeShow);
+        temp.setText(format.format(mDateAndTime.getTime()));
     }
+
+
+    // for testing
+
+    public void handleDateSelect(View v){
+        new DatePickerDialog(
+                manual_entry.this,
+                manual_entry.this,
+                mDateAndTime.get(Calendar.YEAR),
+                mDateAndTime.get(Calendar.MONTH),
+                mDateAndTime.get(Calendar.DAY_OF_MONTH)
+        ).show();
+    }
+    public void handleTimeSelect(View v){
+        new TimePickerDialog(
+                manual_entry.this,
+                manual_entry.this,
+                mDateAndTime.get(Calendar.HOUR),
+                mDateAndTime.get(Calendar.MINUTE),
+                true
+        ).show();
+    }
+
+    public void handleDurationSelect(View v){
+        DialogFragment dialogFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_DURATION);
+        dialogFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_duration));
+    }
+
+    public void handleDistanceSelect(View v){
+        DialogFragment distFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_DISTANCE);
+        distFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_distance));
+    }
+
+    public void handleCaloriesSelect(View v){
+        DialogFragment calFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_CALORIES);
+        calFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_calories));
+    }
+
+    public void handleHeartSelect(View v){
+        DialogFragment heartFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_HEART_RATE);
+        heartFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_heart_rate));
+    }
+
+    public void handleCommentSelect(View v){
+        DialogFragment commFragment = selectorDialogFragment.newInstance(selectorDialogFragment.DIALOG_ID_COMMENT);
+        commFragment.show(getFragmentManager(), getString(R.string.dialog_fragment_tag_comment));
+    }
+
 }

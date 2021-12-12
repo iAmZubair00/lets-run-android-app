@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FitnessApp</string>
+    <string name="app_name">Fitness App</string>
     <string name="input_type">Input Type</string>
     <string name="activity_type">Activity Type</string>
     <string name="save">Save</string>

@@ -1,42 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:orientation="vertical">-->
+
+<!--    <ListView-->
+<!--        android:id="@+id/entryListView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content" />-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:gravity="bottom"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/saveButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:onClick="onSaveButtonClicked"-->
+<!--            android:text="@string/save" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/cancelButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:onClick="onCancelButtonClicked"-->
+<!--            android:text="@string/cancel" />-->
+<!--    </LinearLayout>-->
+<!--</LinearLayout>-->
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/toolbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="?attr/colorPrimary"-->
-<!--        android:elevation="6dp"-->
-<!--        android:minHeight="?attr/actionBarSize"-->
-<!--        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
-<!--        />-->
-    <ListView
-        android:id="@+id/entryListView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    tools:context=".manual_entry">
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/SV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="horizontal">
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp">
 
-        <Button
-            android:id="@+id/saveButton"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/SVLinearLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onSaveButtonClicked"
-            android:text="@string/save" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/cancelButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onCancelButtonClicked"
-            android:text="@string/cancel" />
-    </LinearLayout>
-</LinearLayout>
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@android:id/text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:gravity="center_vertical"
+                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+                android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                android:text="Date"
+                android:onClick="handleDateSelect"/>
+
+            <TextView
+                android:id="@+id/dateShow"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="" />
+
+
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@android:id/text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:gravity="center_vertical"
+                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+                android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                android:text="Time"
+                android:onClick="handleTimeSelect"/>
+
+            <TextView
+                android:id="@+id/timeShow"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="" />
+
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@android:id/text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:gravity="center_vertical"
+                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+                android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                android:text="Duration"
+                android:onClick="handleDurationSelect"/>
+
+            <TextView
+                android:id="@+id/durationShow"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="" />
+
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@android:id/text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:gravity="center_vertical"
+                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+                android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                android:text="Distance"
+                android:onClick="handleDistanceSelect"/>
+
+
+            <TextView
+                android:id="@+id/distanceShow"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="" />
+
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@android:id/text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:gravity="center_vertical"
+                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+                android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                android:text="Calories"
+                android:onClick="handleCaloriesSelect"/>
+
+
+            <TextView
+                android:id="@+id/calorieShow"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="" />
+
+
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@android:id/text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:gravity="center_vertical"
+                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+                android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                android:text="Heart Rate"
+                android:onClick="handleHeartSelect"/>
+
+            <TextView
+                android:id="@+id/heartShow"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="" />
+
+
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@android:id/text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:gravity="center_vertical"
+                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+                android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                android:text="Comment"
+                android:onClick="handleCommentSelect"/>
+
+            <TextView
+                android:id="@+id/commentShow"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
