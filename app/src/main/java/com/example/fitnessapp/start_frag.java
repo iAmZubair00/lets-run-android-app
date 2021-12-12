@@ -67,7 +67,7 @@ public class start_frag extends Fragment {
 
 
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_start_frag, container, false);
+        View view= inflater.inflate(R.layout.start_frag, container, false);
         Spinner inputSpinner = (Spinner) view.findViewById(R.id.inputSpinner);
         Spinner activitySpinner=(Spinner) view.findViewById(R.id.activitySpinner);
 

@@ -10,6 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FitnessApp">
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/preference_settings" />
 
         <activity
             android:name=".Login"
@@ -24,19 +27,19 @@
         <activity
             android:name=".profile"
             android:label="Profile"
-            android:parentActivityName=".starting_activity"></activity>
+            android:parentActivityName=".main_activity" />
         <activity
-            android:name=".starting_activity"
-            android:label="MainActivity"></activity>
+            android:name=".main_activity"
+            android:label="MainActivity" />
         <activity
             android:name=".manual_entry"
             android:label="Manual Entry Activity"
-            android:parentActivityName=".starting_activity"></activity>
+            android:parentActivityName=".main_activity" />
         <activity
             android:name=".mapActivity"
             android:exported="false"
-            android:parentActivityName=".starting_activity"
-            android:label="Map"/>
+            android:label="Map"
+            android:parentActivityName=".main_activity" />
     </application>
 
 </manifest>

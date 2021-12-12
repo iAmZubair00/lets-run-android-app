@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="Application Settings">
+
+        <SwitchPreference
+            android:key="checkBoxPref"
+            android:summary="Posting your records anonymously"
+            android:title="Privacy Settings" />
+
+    </PreferenceCategory>
+
+    <ListPreference
+        android:dialogTitle="Unit Preference"
+        android:entries="@array/unit_preference_items"
+        android:entryValues="@array/unit_preference_item_values"
+        android:key="unitPref"
+        android:summary="Select the units"
+        app:useSimpleSummaryProvider="true"
+        android:title="Unit Preference" />
+
+    <EditTextPreference
+        android:key="emailPref"
+        android:inputType="textEmailAddress"
+        android:title="Share Email"
+        android:summary="Enter Your Email"
+        app:useSimpleSummaryProvider="true"/>
+
+
+
+    <PreferenceCategory android:title="Account Settings">
+        <Preference
+            app:key="signoutBtn"
+            app:title="Sign out" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

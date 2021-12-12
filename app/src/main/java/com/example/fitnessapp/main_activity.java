@@ -12,7 +12,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.tabs.TabLayout;
 
-public class starting_activity extends AppCompatActivity {
+public class main_activity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -21,7 +21,7 @@ public class starting_activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.starting_activity);
+        setContentView(R.layout.main_activity);
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Start"));
@@ -69,11 +69,11 @@ public class starting_activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if(item.getTitle().equals("Edit Profile")){
-            Intent intent = new Intent(starting_activity.this, profile.class);
+            Intent intent = new Intent(main_activity.this, profile.class);
             startActivity(intent);
         }
         else if(item.getTitle().equals("Set Goal")){
-            Intent intent = new Intent(starting_activity.this, profile.class);
+            Intent intent = new Intent(main_activity.this, profile.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

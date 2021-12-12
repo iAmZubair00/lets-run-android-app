@@ -4,23 +4,18 @@ import android.app.DatePickerDialog;
 import android.app.FragmentManager;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.DialogFragment;
 
 
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -115,7 +110,7 @@ public class manual_entry extends AppCompatActivity implements DatePickerDialog.
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(manual_entry.this, starting_activity.class);
+                Intent intent = new Intent(manual_entry.this, main_activity.class);
                 startActivity(intent);
             }
         });

@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -17,7 +20,7 @@ import android.widget.TextView;
  * Use the {@link settings_frag#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class settings_frag extends Fragment {
+public class settings_frag extends PreferenceFragmentCompat {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,33 +60,59 @@ public class settings_frag extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        // Inflate the layout for this fragment
+//
+//        SharedPreferences sh_prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+//        SharedPreferences.Editor pref_editor = sh_prefs.edit();
+//
+//        View view= inflater.inflate(R.layout.fragment_settings_frag, container, false);
+//
+//        final TextView signOutBtn=(TextView) view.findViewById(R.id.signoutBtn);
+//        signOutBtn.setOnClickListener(new View.OnClickListener()
+//        {
+//
+//            @Override
+//            public void onClick(View v)
+//            {
+//                pref_editor.clear();
+//                pref_editor.apply();
+//
+//                Intent intent = new Intent(getContext(), Login.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        return view;
+//    }
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public void onCreatePreferences(Bundle bundle, String s) {
+        addPreferencesFromResource(R.xml.preference_settings);
 
         SharedPreferences sh_prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         SharedPreferences.Editor pref_editor = sh_prefs.edit();
 
-        View view= inflater.inflate(R.layout.fragment_settings_frag, container, false);
+        Preference signoutBtn = getPreferenceManager().findPreference("signoutBtn");
+        if (signoutBtn != null) {
+            signoutBtn.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference arg0) {
+                    pref_editor.clear();
+                    pref_editor.apply();
 
-        final TextView signOutBtn=(TextView) view.findViewById(R.id.signoutBtn);
-        signOutBtn.setOnClickListener(new View.OnClickListener()
-        {
+                    Intent intent = new Intent(getContext(), Login.class);
+                    startActivity(intent);
+                    return true;
+                }
+            });
+        }
 
-            @Override
-            public void onClick(View v)
-            {
-                pref_editor.clear();
-                pref_editor.apply();
-
-                Intent intent = new Intent(getContext(), Login.class);
-                startActivity(intent);
-            }
-        });
-
-        return view;
     }
+
 }

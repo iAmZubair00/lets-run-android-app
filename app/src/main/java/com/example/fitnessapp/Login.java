@@ -35,7 +35,7 @@ public class Login extends AppCompatActivity {
         String password_pref=sh_prefs.getString("password","");
         long userId=sh_prefs.getLong("userId",0);
         if(!email_pref.isEmpty() && !password_pref.isEmpty() && userId!=0){
-            Intent intent = new Intent(Login.this, starting_activity.class);
+            Intent intent = new Intent(Login.this, main_activity.class);
             startActivity(intent);
         }
 
@@ -95,7 +95,7 @@ public class Login extends AppCompatActivity {
                                     pref_editor.apply();
                                 }
 
-                                Intent intent = new Intent(Login.this, starting_activity.class);
+                                Intent intent = new Intent(Login.this, main_activity.class);
                                 startActivity(intent);
 
                             }
