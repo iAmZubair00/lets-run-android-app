@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".mapActivity"></fragment>
@@ -21,70 +21,47 @@
 
 
         <TextView
-            android:id="@+id/gps_type"
+            android:id="@+id/activity_type"
             android:textStyle="bold"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Activity:"/>
 
         <TextView
-            android:id="@+id/gps_avg_speed"
+            android:id="@+id/speed"
             android:textStyle="bold"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Speed:"/>
 
         <TextView
-            android:id="@+id/gps_cur_speed"
+            android:id="@+id/avg_speed"
             android:textStyle="bold"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Avg Speed:"/>
 
         <TextView
-            android:id="@+id/gps_climb"
+            android:id="@+id/climb"
             android:textStyle="bold"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Climbed:"/>
 
         <TextView
-            android:id="@+id/gps_calories"
+            android:id="@+id/calories"
             android:textStyle="bold"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Calorie:"/>
 
         <TextView
-            android:id="@+id/gps_distance"
+            android:id="@+id/distance"
             android:textStyle="bold"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Distance:"/>
 
     </LinearLayout>
 
-    <!-- save or cancel section -->
-    <LinearLayout
-        android:id="@+id/button_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_alignParentBottom="true">
-
-        <Button
-            android:id="@+id/button_save_gps"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_weight="1"
-            android:onClick="selectGPSSave"
-            android:text="save" >
-        </Button>
-
-        <Button
-            android:id="@+id/button_cancel_gps"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
-            android:layout_weight="1"
-            android:onClick="selectGPSCancel"
-            android:text="cancel" >
-        </Button>
-
-    </LinearLayout>
-</RelativeLayout>
+</FrameLayout>

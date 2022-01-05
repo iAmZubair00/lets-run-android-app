@@ -65,6 +65,24 @@
                 android:paddingStart="?android:attr/listPreferredItemPaddingStart"
                 android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
                 android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                android:text="Activity"/>
+
+            <TextView
+                android:id="@+id/activityShow"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="" />
+
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@android:id/text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:gravity="center_vertical"
+                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+                android:minHeight="?android:attr/listPreferredItemHeightSmall"
                 android:text="Date"
                 android:onClick="handleDateSelect"/>
 
@@ -195,6 +213,22 @@
                 android:text="" />
 
         </LinearLayout>
+
+
     </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/save" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

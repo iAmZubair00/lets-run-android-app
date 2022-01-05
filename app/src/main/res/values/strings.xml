@@ -40,7 +40,6 @@
     </string-array>
 
 
-
     <string-array name="unit_preference_items">
         <item>Miles</item>
         <item>Km</item>
@@ -52,8 +51,6 @@
         <item>2</item>
         <item>3</item>
     </string-array>
-
-
 
 
     <!-- TODO: Remove or change this placeholder text -->

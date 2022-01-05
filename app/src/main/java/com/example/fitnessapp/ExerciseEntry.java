@@ -9,14 +9,14 @@ public class ExerciseEntry {
     private int mInputType;        // Manual, GPS or automatic
     private int mActivityType;     // Running, cycling etc.
     private long mDateTime;        // When does this entry happen
-    private double mDuration;         // Exercise duration in seconds
-    private double mDistance;      // Distance traveled. Either in meters or feet.
+    private double mDuration=0;         // Exercise duration in seconds
+    private double mDistance=0;      // Distance traveled. Either in meters or feet.
     //private double mAvgPace;       // Average pace
     //private double mAvgSpeed;      // Average speed
-    private int mCalorie;          // Calories burnt
+    private int mCalorie=0;          // Calories burnt
     //private double mClimb;         // Climb. Either in meters or feet.
-    private int mHeartRate;        // Heart rate
-    private String mComment;       // Comments
+    private int mHeartRate=0;        // Heart rate
+    private String mComment="";       // Comments
     //private ArrayList<LatLng> mLocationList; // Location list
 
     // Constructor
@@ -129,6 +129,6 @@ public class ExerciseEntry {
     // Will be used by the ArrayAdapter in the ListView
     @Override
     public String toString() {
-        return mInputType+": "+mActivityType+", "+mDateTime;
+        return "inputType= "+mInputType+", activityType= "+mActivityType+", dateTime= "+mDateTime+", duration= "+mDuration+", distance= "+mDistance+", calories= "+mCalorie+", heartRate= "+mHeartRate+", comment= "+mComment;
     }
 }

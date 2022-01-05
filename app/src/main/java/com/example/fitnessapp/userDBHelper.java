@@ -17,10 +17,10 @@ public class userDBHelper extends SQLiteOpenHelper {
 
     // Keys for table
     public static final String KEY_ROWID = "_id";
-    public static final String KEY_NAME = "input_type";
-    public static final String KEY_EMAIL = "activity_type";
-    public static final String KEY_PASSWORD = "date_time";
-    public static final String KEY_PHONE = "duration";
+    public static final String KEY_NAME = "name";
+    public static final String KEY_EMAIL = "email";
+    public static final String KEY_PASSWORD = "password";
+    public static final String KEY_PHONE = "phone";
     public static final String KEY_ISMALE = "ismale";
 
 
@@ -57,7 +57,7 @@ public class userDBHelper extends SQLiteOpenHelper {
 
 
     // Insert a item given each column value
-    public long insertEntry(User entry) {
+    public long insertUser(User entry) {
 
         // Insert all the values
         ContentValues values = new ContentValues();
@@ -74,6 +74,23 @@ public class userDBHelper extends SQLiteOpenHelper {
         return insertId;
     }
 
+    // update a item given each column value
+    public long updateUser(User entry) {
+
+        // Insert all the values
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME,entry.getName());
+        values.put(KEY_EMAIL,entry.getEmail());
+        values.put(KEY_PASSWORD, entry.getPassword());
+        values.put(KEY_PHONE,entry.getPhone());
+        values.put(KEY_ISMALE,entry.getIsMale());
+
+        // Insert to database
+        SQLiteDatabase database = getWritableDatabase();
+        long updateId = database.update(TABLE_NAME, values, "_id = ?", new String[]{String.valueOf(entry.getId())});
+        database.close();
+        return updateId;
+    }
 
     private User cursorToUserEntry(Cursor cursor) {
 
@@ -124,6 +141,14 @@ public class userDBHelper extends SQLiteOpenHelper {
         database.close();
 
         return entry;
+    }
+
+    public void deleteAll()
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_NAME,null,null);
+        db.execSQL("delete from "+ TABLE_NAME);
+        db.close();
     }
 
 

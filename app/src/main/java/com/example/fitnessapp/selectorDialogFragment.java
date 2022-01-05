@@ -3,9 +3,11 @@ package com.example.fitnessapp;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.widget.EditText;
 
 import android.app.DialogFragment;
@@ -20,6 +22,36 @@ public class selectorDialogFragment extends DialogFragment {
     public static final int DIALOG_ID_COMMENT = 6;
 
     private static final String DIALOG_ID_KEY = "dialog_id";
+
+//    public interface ISelectedData {
+//        void onSelectedData(String string);
+//    }
+//
+//    private ISelectedData mCallback;
+
+//    @Override
+//    public void onAttach(Activity activity) {
+//        super.onAttach(activity);
+//
+//        try {
+//            mCallback = (ISelectedData) activity;
+//        }
+//        catch (ClassCastException e) {
+//            Log.d("MyDialog", "Activity doesn't implement the ISelectedData interface");
+//        }
+//    }
+
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//
+//        try {
+//            mCallback = (ISelectedData) getActivity();
+//        }
+//        catch (ClassCastException e) {
+//            Log.d("MyDialog", "Activity doesn't implement the ISelectedData interface");
+//        }
+//    }
 
     public static selectorDialogFragment newInstance(int dialog_id) {
         selectorDialogFragment frag = new selectorDialogFragment();
@@ -56,7 +88,18 @@ public class selectorDialogFragment extends DialogFragment {
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                //manual_entry.entry.setmDuration(2);
+//                                String strVal=mDurEditText.getText().toString();
+//                                mCallback.onSelectedData(strVal);
+//                                getDialog().dismiss();
 
+                                //Log.d("duration is:",mDurEditText.getText().toString());
+                                String value=mDurEditText.getText().toString();
+                                ((manual_entry) parent).entry.setmDuration(!value.equals("") ? Double.parseDouble(value)*60 : 0);
+
+//                                manual_entry callingActivity = (manual_entry) getActivity();
+//                                callingActivity.onUserSelectValue(val);
+//                                dialog.dismiss();
                             }
                         })
                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -76,7 +119,9 @@ public class selectorDialogFragment extends DialogFragment {
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                String value = mDisEditText.getText().toString();
+                                ((manual_entry) parent).entry.
+                                        setmDistance(!value.equals("") ? Double.parseDouble(value) : 0);
                             }
                         })
                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -96,7 +141,9 @@ public class selectorDialogFragment extends DialogFragment {
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                String value=mCalEditText.getText().toString();
+                                ((manual_entry) parent).entry.
+                                        setmCalorie(!value.equals("") ? Integer.parseInt(value) : 0);
                             }
                         })
                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -116,7 +163,9 @@ public class selectorDialogFragment extends DialogFragment {
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                String value=mHearEditText.getText().toString();
+                                ((manual_entry) parent).entry.
+                                        setmHeartRate(!value.equals("") ? Integer.parseInt(value) : 0);
                             }
                         })
                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -135,7 +184,8 @@ public class selectorDialogFragment extends DialogFragment {
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                String value=mComEditText.getText().toString();
+                                ((manual_entry) parent).entry.setmComment(value);
                             }
                         })
                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

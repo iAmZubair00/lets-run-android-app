@@ -63,6 +63,32 @@ public class settings_frag extends PreferenceFragmentCompat {
 
     }
 
+    @Override
+    public void onCreatePreferences(Bundle bundle, String s) {
+        addPreferencesFromResource(R.xml.preference_settings);
+
+        SharedPreferences sh_prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences.Editor pref_editor = sh_prefs.edit();
+
+        Preference signoutBtn = getPreferenceManager().findPreference("signoutBtn");
+        if (signoutBtn != null) {
+            signoutBtn.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference arg0) {
+                    pref_editor.clear();
+                    pref_editor.apply();
+
+                    Intent intent = new Intent(getContext(), Login.class);
+                    startActivity(intent);
+                    return true;
+                }
+            });
+        }
+
+    }
+
+
+
 //    @Override
 //    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 //                             Bundle savedInstanceState) {
@@ -90,29 +116,5 @@ public class settings_frag extends PreferenceFragmentCompat {
 //
 //        return view;
 //    }
-
-    @Override
-    public void onCreatePreferences(Bundle bundle, String s) {
-        addPreferencesFromResource(R.xml.preference_settings);
-
-        SharedPreferences sh_prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-        SharedPreferences.Editor pref_editor = sh_prefs.edit();
-
-        Preference signoutBtn = getPreferenceManager().findPreference("signoutBtn");
-        if (signoutBtn != null) {
-            signoutBtn.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference arg0) {
-                    pref_editor.clear();
-                    pref_editor.apply();
-
-                    Intent intent = new Intent(getContext(), Login.class);
-                    startActivity(intent);
-                    return true;
-                }
-            });
-        }
-
-    }
 
 }

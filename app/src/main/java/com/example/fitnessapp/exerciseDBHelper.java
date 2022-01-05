@@ -3,6 +3,7 @@ package com.example.fitnessapp;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 public class exerciseDBHelper extends SQLiteOpenHelper {
 
     // Important table information
-    public static final String TABLE_NAME = "entry";
+    public static final String TABLE_NAME = "exercise";
     private static final String log_title = "Storing in Database";
 
     // Keys for table
@@ -33,22 +34,27 @@ public class exerciseDBHelper extends SQLiteOpenHelper {
             + KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + KEY_INPUT_TYPE + " INTEGER NOT NULL, "
             + KEY_ACTIVITY_TYPE + " INTEGER NOT NULL, "
-            + KEY_DATE_TIME + " DATETIME NOT NULL, "
-            + KEY_DURATION + " FLOAT, "
-            + KEY_DISTANCE + " FLOAT, "
+            + KEY_DATE_TIME + " LONG NOT NULL, "
+            + KEY_DURATION + " DOUBLE, "
+            + KEY_DISTANCE + " DOUBLE, "
             + KEY_CALORIES + " INTEGER, "
             + KEY_HEARTRATE + " INTEGER, "
-            + KEY_COMMENT + " TEXT " + ");";
+            + KEY_COMMENT + " STRING " + ");";
 
     // Constructor
     public exerciseDBHelper(Context context) {
-        super(context, "entry.db", null, 1);
+        super(context, "exercise.db", null, 1);
     }
 
     // Create table schema if not exists
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE_ENTRIES);
+
+        try {
+            db.execSQL(CREATE_TABLE_ENTRIES);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -124,12 +130,11 @@ public class exerciseDBHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
 
         // Fetch the entries one by one until cursor reaches the end
-        while (!cursor.isAfterLast()) {
+         do{
             ExerciseEntry entry = cursorToExerciseEntry(cursor);
             Log.d(log_title, cursorToExerciseEntry(cursor).toString());
             entries.add(entry);
-            cursor.moveToNext();
-        }
+        }while (cursor.moveToNext());
 
         cursor.close();
         database.close();
@@ -147,9 +152,9 @@ public class exerciseDBHelper extends SQLiteOpenHelper {
         entry.setmDateTime(cursor.getLong(3));
         entry.setmDuration(cursor.getInt(4));
         entry.setmDistance(cursor.getDouble(5));
-        entry.setmCalorie(cursor.getInt(8));
-        entry.setmHeartRate(cursor.getInt(10));
-        entry.setmComment(cursor.getString(11));
+        entry.setmCalorie(cursor.getInt(6));
+        entry.setmHeartRate(cursor.getInt(7));
+        entry.setmComment(cursor.getString(8));
 
         return entry;
     }

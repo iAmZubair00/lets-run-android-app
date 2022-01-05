@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,11 +24,9 @@ import com.github.dhaval2404.imagepicker.ImagePicker;
 
 public class profile extends AppCompatActivity {
 
-
     private ImageView imgView;
     private Button changeBtn;
     private Button goToLoginBtn;
-
 
     userDBHelper DB;
     User user = new User();
@@ -38,12 +38,6 @@ public class profile extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        SharedPreferences sh_prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor pref_editor = sh_prefs.edit();
-        String email_pref= sh_prefs.getString("email","");
-        String password_pref=sh_prefs.getString("password","");
-        long userId=sh_prefs.getLong("userId",0);
-
         EditText emailField = (EditText) findViewById(R.id.signup_email);
         EditText passField = (EditText) findViewById(R.id.signup_password);
         EditText nameField =(EditText) findViewById(R.id.signup_name);
@@ -54,6 +48,12 @@ public class profile extends AppCompatActivity {
         changeBtn = (Button) findViewById(R.id.signup_camerabtn);
 
         DB = new userDBHelper(this);
+
+        SharedPreferences sh_prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor pref_editor = sh_prefs.edit();
+        String email_pref= sh_prefs.getString("email","");
+        String password_pref=sh_prefs.getString("password","");
+        long userId=sh_prefs.getLong("userId",0);
 
         if(!email_pref.isEmpty() && !password_pref.isEmpty() && userId!=0){
             loadUserInfo(userId);
@@ -74,6 +74,27 @@ public class profile extends AppCompatActivity {
                 user.setPhone(phoneField.getText().toString());
                 user.setIsMale(rbField.isChecked());
                 saveUserInfo(user);
+
+                Intent intent = new Intent(profile.this, Login.class);
+                startActivity(intent);
+
+            }
+        });
+
+        final Button editBtn=(Button) findViewById(R.id.signup_editBtn);
+        editBtn.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v)
+            {
+                user.setId(userId);
+                user.setName(nameField.getText().toString());
+                user.setEmail(emailField.getText().toString());
+                user.setPassword(passField.getText().toString());
+                user.setPhone(phoneField.getText().toString());
+                user.setIsMale(rbField.isChecked());
+                editUserInfo(user);
 
                 Intent intent = new Intent(profile.this, Login.class);
                 startActivity(intent);
@@ -117,6 +138,24 @@ public class profile extends AppCompatActivity {
         imgView.setImageURI(uri);
     }
 
+    //Method to show "save" button in app bar by inflating the save_btn.xml
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        SharedPreferences sh_prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor pref_editor = sh_prefs.edit();
+        String email_pref= sh_prefs.getString("email","");
+        String password_pref=sh_prefs.getString("password","");
+        long userId=sh_prefs.getLong("userId",0);
+
+        if(!email_pref.isEmpty() && !password_pref.isEmpty() && userId!=0){
+            MenuInflater inflater= getMenuInflater();
+            inflater.inflate(R.menu.save_btn, menu);
+        }
+
+        return true;
+    }
+
     private void saveUserInfo(User user){
 
         SharedPreferences sh_prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -127,7 +166,7 @@ public class profile extends AppCompatActivity {
 
         //Log.i("email is",email);
         //Log.i("password is",password);
-        long inserted = DB.insertEntry(user);
+        long inserted = DB.insertUser(user);
         if(inserted!=-1){
             Toast.makeText(profile.this, "New Entry Inserted", Toast.LENGTH_SHORT).show();
 
@@ -140,6 +179,32 @@ public class profile extends AppCompatActivity {
         }
         else{
             Toast.makeText(profile.this, "New Entry Not Inserted", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void editUserInfo(User user){
+
+        SharedPreferences sh_prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor pref_editor = sh_prefs.edit();
+        String email_pref= sh_prefs.getString("email","");
+        String password_pref=sh_prefs.getString("password","");
+        long userId=sh_prefs.getLong("userId",0);
+
+        //Log.i("email is",email);
+        //Log.i("password is",password);
+        long updated = DB.updateUser(user);
+        if(updated!=-1){
+            Toast.makeText(profile.this, "Entry updated", Toast.LENGTH_SHORT).show();
+
+            if(email_pref.isEmpty() && password_pref.isEmpty() && userId==0){
+                pref_editor.putLong("userId", user.getId());
+                pref_editor.putString("email", user.getEmail());
+                pref_editor.putString("password", user.getPassword());
+                pref_editor.apply();
+            }
+        }
+        else{
+            Toast.makeText(profile.this, "Entry Not updated", Toast.LENGTH_SHORT).show();
         }
     }
 
